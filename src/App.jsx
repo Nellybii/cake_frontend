@@ -1,15 +1,12 @@
-import './App.css'
-import "bootstrap/dist/css/bootstrap.min.css";
-import NavBarComp from './Components/NavBarComp';
-
+import Navigation from "./Header/Components/Navigation"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-
   return (
-    
-  <NavBarComp/>
-    
+    <>
+    <Navigation/>
+    </>
   )
 }
 
-export default App;
+export default App
