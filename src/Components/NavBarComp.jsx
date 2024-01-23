@@ -6,14 +6,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function NavbarComp() {
   return (
-    <Navbar backgroundColor="fb8500" className="bg-body-tertiary" fixed="top">
+    <Navbar  className="bg-body-tertiary" fixed="top">
       <Container>
         <Navbar.Brand href="#home">Sweet Cakes</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#cake">Cake</Nav.Link>
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="/home">Home</Nav.Link>
 
             <NavDropdown title="Category" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">
