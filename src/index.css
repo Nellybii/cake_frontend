@@ -58,4 +58,10 @@ input{
     margin: 30px 0;
     color: #090f25;
 }
+.footer{
+    background-color: #422f72; 
+    padding: 30px 30px;
+    display: flex;
+    gap: 20px;
+}
 
