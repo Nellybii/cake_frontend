@@ -1,12 +1,10 @@
-import React from "react";
+import React from 'react'
 import { Carousel, Image } from "react-bootstrap";
-import Cake from "./Cake";
 
-
-function Home() {
+function Karousel() {
   return (
     <div>
-    <Carousel style={{height:"600px", marginBottom:"10px"}}>
+      <Carousel style={{height:"600px", marginBottom:"10px"}}>
       <Carousel.Item>
         <Image style={{height:"600px", width:"100%"}}
           src="https://img.freepik.com/free-photo/ai-generated-cake-picture_23-2150649403.jpg?t=st=1706008514~exp=1706012114~hmac=b5c6ad53b9b13940c194550f07b9f8af96a60de985fca8128f28644a0c24fcdc&w=826"
@@ -39,11 +37,9 @@ function Home() {
           </p>
         </Carousel.Caption>
       </Carousel.Item>
-    </Carousel>
-    <h2>Our Products</h2>
-    <Cake />
+    </Carousel>  
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Karousel
