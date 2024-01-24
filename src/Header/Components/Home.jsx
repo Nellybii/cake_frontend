@@ -13,15 +13,20 @@ function Home() {
      
 
       <Container>
-      <Row>
-        <Col xs><Cardbody /></Col>
-        <Col xs><Cardbody /></Col>
-        <Col xs><Cardbody /></Col>
-        <Col xs><Cardbody /></Col>
-        <Col xs><Cardbody /></Col>
-        <Col xs><Cardbody /></Col>
-        <Col xs><Cardbody /></Col>
-        <Col xs><Cardbody /></Col>
+      <Row >
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+        <Col  md={4} sm={6} xs={12} className="p-3"><Cardbody /></Col>
+  
    
       </Row>
     </Container>
