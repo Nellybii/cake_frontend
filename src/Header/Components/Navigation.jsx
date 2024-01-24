@@ -10,17 +10,20 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import Birthdaycakes from "../../Components/Birthdaycakes";
 
 function Navigation() {
+  
+
   return (
     <>
       <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="#home">LOGO</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="home">HOME</Nav.Link>
+            <Nav.Link href="/home">HOME</Nav.Link>
             <NavDropdown title="CATEGORY" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item href="/birthdaycakes">
                 Birthday Cakes
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -53,6 +56,7 @@ function Navigation() {
         <Route exact path="/about" element={<About />}></Route>
         <Route exact path="/delivery" element={<Delivery />}></Route>
         <Route exact path="/contact" element={<Contact />}></Route>
+        <Route exact path="/birthdaycakes" element={<Birthdaycakes />}></Route>
       </Routes>
     </>
   );
