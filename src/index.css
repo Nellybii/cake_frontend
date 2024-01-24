@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body{
+    background-color: #aea9bb;
+}
+.contact-container{
+    width: 500px;
+    background: #fff;
+    padding: 30px 40px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 15px;
+    box-shadow: 0 30px 45px rgba(73, 67, 87, 0.2);
+}
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 0 70px 0;
+    gap: 15px;
+}
+
+input{
+    padding: 15px 10px;
+    border: 1px solid #bbc0c5;
+    border-radius: 5px;
+    color: #170444;
+    outline: none;
+    width:100%;
+}
+
+
+
