@@ -1,14 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App.jsx'
+import App from './App'
+import { BrowserRouter } from "react-router-dom";
 import './index.css'
+
+
+{/* set custom breakpoints  */ }
+import ThemeProvider from 'react-bootstrap/ThemeProvider'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-    <App />
+
+
+      <ThemeProvider breakpoints={['xxl']}
+        minBreakpoint="xs">
+        <App />
+      </ThemeProvider>
+
     </BrowserRouter>
+
   </React.StrictMode>,
 )
