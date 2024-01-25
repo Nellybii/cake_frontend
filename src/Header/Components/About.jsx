@@ -3,10 +3,10 @@ import { Col, Row } from "react-bootstrap";
 function About() {
   return (
     <div className="container mt-5">
-      <div className="about-us bg-light p-4 rounded">
+      
         <h2 className="text-primary">About Us</h2>
         <Row>
-          <Col>
+          <Col className="about-us bg-light p-4 rounded mb-2">
             <h5>Our Story</h5>
             Welcome to SWeet caked – Where Sweet Dreams Come True! &#127874; Our
             Story: Since the beginning of the year, Sweet cakes has been
@@ -19,7 +19,7 @@ function About() {
           </Col>
 
           <Col>
-            <Col>
+            <Col className="about-us bg-light p-4 rounded mb-2">
               <h5> Our Mission</h5> : At Sweet cakes, our mission is simple – to
               elevate the art of baking and provide our customers with a
               delectable experience that lingers on their taste buds and in
@@ -28,7 +28,7 @@ function About() {
               selected to ensure the highest standard of taste and freshness,
               reflecting our commitment to excellence.
             </Col>
-            <p>
+            <p className="about-us bg-light p-4 rounded mb-2">
               <h5>Our Values:</h5> At sweet cakes, we value collaboration,
               innovation, and excellence. Our team consists of talented
               professionals who bring diverse skills and experiences to the
@@ -37,7 +37,7 @@ function About() {
           </Col>
         </Row>
 
-        <div>
+        <Row className="about-us bg-light p-4 rounded">
           <h3>Our Team</h3>
           <p>
             🧑&#128114; Meet Our Team: Behind every scrumptious creation at
@@ -61,8 +61,8 @@ function About() {
             <a href="sweetcakes@gmail.com">sweetcakes@gmail.com</a> for
             inquiries or collaborations. We look forward to connecting with you!
           </p>
-        </div>
-      </div>
+        </Row>
+      
     </div>
   );
 }
