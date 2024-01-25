@@ -25,12 +25,12 @@ function Contact() {
   return (
     <>
       <h2>CONTACT US</h2>
-      <div className='icons'>
+      {/* <div className='icons'>
         <a href="#"><FaFacebook /></a>
         <a href="#"> <FaInstagram /></a>
         <a href="#"><FaWhatsapp /></a>
         <a href="#"> <IoCallOutline /></a>
-      </div>
+      </div> */}
       <div className="contact-container">
         <div className='contact-'>
           <div className="form-title">
