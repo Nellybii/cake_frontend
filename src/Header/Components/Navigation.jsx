@@ -10,6 +10,9 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { FaUser, FaShoppingCart } from 'react-icons/fa';
+import Cart from "../../components/Cart";
+import User from "../../Login components/User";
 
 function Navigation() {
   return (
@@ -43,6 +46,16 @@ function Navigation() {
             <Nav.Link href="about">ABOUT</Nav.Link>
             <Nav.Link href="delivery">DELIVERY</Nav.Link>
             <Nav.Link href="contact">CONTACT US</Nav.Link>
+
+            {/* Cart Link */}
+            <Nav.Link href="cart" >
+              <FaShoppingCart />
+            </Nav.Link>
+
+            {/* User Profile Link */}
+            <Nav.Link href="user-profile" >
+              <FaUser />
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -53,6 +66,8 @@ function Navigation() {
         <Route exact path="/about" element={<About />}></Route>
         <Route exact path="/delivery" element={<Delivery />}></Route>
         <Route exact path="/contact" element={<Contact />}></Route>
+        <Route exact path="/cart" element={<Cart />}></Route>
+        <Route exact path="/user-profile" element={<User />}></Route>
       </Routes>
     </>
   );

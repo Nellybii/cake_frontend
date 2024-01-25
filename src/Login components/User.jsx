@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { FaUser } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 
@@ -11,9 +12,9 @@ export default function User({ isAuthenticated }) {
 
   return (
     <div className="user-profile-dropdown">
-      <button onClick={toggleDropdown}>
+      <Button onClick={toggleDropdown}>
         <FaUser /> User
-      </button>
+      </Button>
       {isOpen && (
         <div className="dropdown-content">
           <NavLink to="/profile" onClick={toggleDropdown}>

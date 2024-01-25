@@ -24,7 +24,7 @@ function Contact() {
   }
   return (
     <>
-      <h1>CONTACT US</h1>
+      <h2>CONTACT US</h2>
       <div className='icons'>
         <a href="#"><FaFacebook /></a>
         <a href="#"> <FaInstagram /></a>
