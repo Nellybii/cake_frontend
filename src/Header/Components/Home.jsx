@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Cardbody from "../../Components/CardBody"
 import Karousel from "../../Components/Karousel";
 // grid layout
@@ -8,6 +9,18 @@ import Col from 'react-bootstrap/Col';
 
 
 function Home() {
+  const [products, setProducts] = useState([]);
+
+   useEffect(() => {
+     // Fetch products
+     fetch(`${BASE_URL}/products`)
+       .then((response) => response.json())
+       .then((data) => setProducts(data))
+       .catch((error) => {
+         console.error(error);
+       });
+   }, []);
+
   return (
     <>
 
