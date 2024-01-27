@@ -20,17 +20,11 @@ function Contact() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputs);
+    alert("Thanks for contacting us, we will get back to you");
   }
   return (
     <>
       <h2>CONTACT US</h2>
-      {/* <div className='icons'>
-        <a href="#"><FaFacebook /></a>
-        <a href="#"> <FaInstagram /></a>
-        <a href="#"><FaWhatsapp /></a>
-        <a href="#"> <IoCallOutline /></a>
-      </div> */}
       <div className="contact-container">
         <div className='contact-'>
           <div className="form-title">

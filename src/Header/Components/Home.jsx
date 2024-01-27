@@ -8,17 +8,17 @@ function Home({ filteredProducts }) {
   return (
     <>
       <Karousel />
-      <div style={{ display: "flex" }}>
+      
         <Container>
           <Row>
             {filteredProducts.map((product) => (
-              <Col key={product.id} md={4} sm={6} xs={12} className="p-3">
+              <Col key={product.id} >
                 <Cardbody product={product} />
               </Col>
             ))}
           </Row>
         </Container>
-      </div>
+      
     </>
   );
 }

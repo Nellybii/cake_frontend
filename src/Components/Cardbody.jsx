@@ -23,14 +23,19 @@ function Cardbody({product}) {
       }
 
     return (
-      <Col md={4} sm={6} xs={12} style={{ marginBottom: "20px" }}>
-        <Card style={{ height: "100%" }}>
+      <Col >
+        <Card style={{
+          width: "20rem",
+          height: "30rem",
+          marginTop: "20px",
+          marginLeft: "10px",
+        }}>
           <Card.Img
             variant="top"
             src={product.image}
-            style={{ height: "400px", objectFit: "cover" }}
+            style={{ height: "250px", objectFit: "cover" }}
           />
-          <Card.Body style={{ height: "200px" }}>
+          <Card.Body >
             <Card.Title>{product.name}</Card.Title>
             <Card.Text>{product.description}</Card.Text>
             <Card.Text>ksh {product.price}</Card.Text>
