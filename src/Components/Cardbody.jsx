@@ -36,6 +36,9 @@ function Cardbody({ product, addToCart }) {
       </Card>
     </Col>
   );
+
+
+
 }
 
 export default Cardbody;
