@@ -1,16 +1,5 @@
-<<<<<<< HEAD
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./Home";
-import Cart from "../../pages/Cart"; // Import the Cart component
-import Category from "./Category";
-import About from "./About";
-import Delivery from "./Delivery";
-import Contact from "./Contact";
-=======
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
->>>>>>> ecca1e47a248570d7167c8ebb1e75f253fcd0e26
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
@@ -78,22 +67,6 @@ function Navigation() {
         <Container>
           <Navbar.Brand href="#">LOGO</Navbar.Brand>
           <Nav className="me-auto">
-<<<<<<< HEAD
-            <Nav.Link as={Link} to="/home">
-              HOME
-            </Nav.Link>
-            <NavDropdown title="CATEGORY" id="basic-nav-dropdown">
-              {/* Add proper links for categories */}
-            </NavDropdown>
-            <Nav.Link as={Link} to="/about">
-              ABOUT
-            </Nav.Link>
-            <Nav.Link as={Link} to="/delivery">
-              DELIVERY
-            </Nav.Link>
-            <Nav.Link as={Link} to="/contact">
-              CONTACT US
-=======
             <Nav.Link href="/">HOME</Nav.Link>
             <NavDropdown title="CATEGORY" id="basic-nav-dropdown">
               <NavDropdown.Item onClick={() => filterProductsByCategory("all")}>
@@ -122,7 +95,6 @@ function Navigation() {
             </Nav.Link>
             <Nav.Link href="/user-profile">
               <FaUser />
->>>>>>> ecca1e47a248570d7167c8ebb1e75f253fcd0e26
             </Nav.Link>
           </Nav>
           <Link to="/cart" style={{ marginLeft: "auto" }}>
@@ -143,22 +115,12 @@ function Navigation() {
         </Container>
       </Navbar>
       <Routes>
-<<<<<<< HEAD
-        <Route exact path="/home" element={<Home />} />
-        <Route exact path="/cart" element={<Cart />} />{" "}
-        {/* Add route for Cart */}
-        <Route exact path="/category" element={<Category />} />
-        <Route exact path="/about" element={<About />} />
-        <Route exact path="/delivery" element={<Delivery />} />
-        <Route exact path="/contact" element={<Contact />} />
-=======
         <Route exact path="/" element={<Home filteredProducts={filteredProducts} />} />
         <Route exact path="/about" element={<About />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/user-profile" element={<Userprofile />} />
         <Route exact path="/profile" element={<UserProfileForm />} />
->>>>>>> ecca1e47a248570d7167c8ebb1e75f253fcd0e26
       </Routes>
     </>
   );
