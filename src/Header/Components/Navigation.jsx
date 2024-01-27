@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -10,7 +10,6 @@ import UserProfileForm from "../../Login components/Profile";
 import Userprofile from "../../Login components/Userprofile";
 import Home from "./Home";
 import About from "./About";
-import Delivery from "./Delivery";
 import Contact from "./Contact";
 import { BASE_URL } from "../../utils/Main";
 
@@ -89,7 +88,6 @@ function Navigation() {
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/about">ABOUT</Nav.Link>
-            <Nav.Link href="/delivery">DELIVERY</Nav.Link>
             <Nav.Link href="/contact">CONTACT US</Nav.Link>
             <Nav.Link href="/cart">
               <FaShoppingCart />
@@ -104,7 +102,6 @@ function Navigation() {
       <Routes>
         <Route exact path="/" element={<Home filteredProducts={filteredProducts} />} />
         <Route exact path="/about" element={<About />} />
-        <Route exact path="/delivery" element={<Delivery />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/user-profile" element={<Userprofile />} />
