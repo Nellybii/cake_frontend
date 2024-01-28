@@ -3,6 +3,7 @@ import { Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+
 function Cardbody({ product, addToCart }) {
   return (
     <Col>
@@ -39,6 +40,10 @@ function Cardbody({ product, addToCart }) {
 
 
 
+
+
+
 }
+
 
 export default Cardbody;

@@ -3,16 +3,18 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Stack from "react-bootstrap/Stack";
+import Alert from "react-bootstrap/Alert"; // Import Alert from react-bootstrap
 import { BASE_URL } from "../utils/Main";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     fetch(`${BASE_URL}/cartItems`)
       .then((response) => response.json())
       .then((data) => {
-        // Initialize quantity to 1 if it's initially undefined
         const updatedCartItems = data.map((item) => ({
           ...item,
           quantity: item.quantity || 1,
@@ -66,6 +68,13 @@ const Cart = () => {
       (subtotal, item) => subtotal + item.quantity * item.price,
       0
     );
+  };
+
+  const handlePlaceOrder = () => {
+    // Perform any necessary actions for placing the order
+    // For demonstration purposes, setOrderPlaced(true) is used to simulate placing an order
+    setOrderPlaced(true);
+    setShowAlert(true);
   };
 
   return (
@@ -163,9 +172,15 @@ const Cart = () => {
               marginLeft: "30px",
               marginBottom: "10px",
             }}
+            onClick={handlePlaceOrder}
           >
             Place Order
           </Button>
+          {showAlert && (
+            <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
+              Your order has been placed and is ready for delivery!
+            </Alert>
+          )}
         </Stack>
       </Col>
     </Row>

@@ -14,6 +14,8 @@ import Contact from "./Contact";
 import { BASE_URL } from "../../utils/Main";
 // import Navtoggle from "../../Login components/Navtoggle";
 import Navtoggle from "../../Login components/Navtoggle";
+import Login from "../../Login components/Login";
+import Signup from "../../Login components/Signup";
 // import Login from "../../Login components/Login";
 // import Signup from "../../Login components/Signup";
 
@@ -107,7 +109,7 @@ function Navigation() {
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/cart" element={<Cart />} />
         {/* <Route exact path="/login" element={<Login />} />
-        <Route exact path="/sign-up" element={<Signup/>} /> */}
+        <Route exact path="/sign-up" element={<Signup />} /> */}
       </Routes>
     </>
   );
