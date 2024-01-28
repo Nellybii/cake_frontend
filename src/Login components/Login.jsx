@@ -1,4 +1,4 @@
-
+import { useContext,useState } from "react";
 import { Formik, Form as FormikForm, Field, ErrorMessage } from "formik";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,6 +7,8 @@ import * as Yup from "yup";
 import axios from 'axios';
 
 import { BASE_URL } from "../utils/Main";
+import { UserContext } from "../UseContext";
+
 
 function Login() {
   const initialValues = {
@@ -38,6 +40,8 @@ function Login() {
       .min(4, "Password is too short - should be 4 chars minimum"),
   });
 
+  const{setUser}=useContext(UserContext)
+
 
   return (
     <Card style={{ width: '30rem' }} className="mx-auto">
@@ -48,13 +52,15 @@ function Login() {
         validationSchema={LoginSchema}
         onSubmit={async (values, { resetForm }) => {
           try {
-            const res = await axios.post('http://127.0.0.1:5000/login',values, {
+            const {data} = await axios.post('http://127.0.0.1:5000/login',values, {
               headers: {
                   'Content-Type': 'application/json',
                  
               },      
           })  
-            console.log(res);
+            // console.log(res);
+            console.log('Login successfull')
+            setUser(data)
       
           } catch (error) {
             console.error(error);

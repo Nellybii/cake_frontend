@@ -1,14 +1,22 @@
-import { useState } from 'react'
+import { useState,useEffect,useContext } from 'react'
+
 import { Link } from 'react-router-dom'
 import { Form, Button, ButtonGroup } from 'react-bootstrap'
+import { UserContext } from '../UseContext';
 
 function Navlog() {
-    const [currentUser, SetCurrentUser] = useState(null)
-
+    const { user } = useContext(UserContext);
+  const [currentUser, setCurrentUser] = useState(user);
+  useEffect(() => {
+  
+    if (!user) {
+      handleLogout();
+    }
+  }, [user]);
 
     function handleLogout() {
-        alert("logged out")
-        SetCurrentUser(!null)
+        alert("logged out");
+    setCurrentUser(null);
     }
     return (
         <>
@@ -36,9 +44,3 @@ export default Navlog
 
 
 
-{/* <Nav.Link href="/login">
-              Log In
-            </Nav.Link>
-            <Nav.Link href="/sign-up">
-            Sign Up
-            </Nav.Link> */}
