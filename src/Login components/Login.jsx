@@ -1,118 +1,119 @@
-import { useContext,useState } from "react";
-import { Formik, Form as FormikForm, Field, ErrorMessage } from "formik";
+import { useContext, useState } from "react";
+import { useFormik } from "formik";
+import toast from "react-hot-toast";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import * as Yup from "yup";
-import axios from 'axios';
+import { api } from "../utils/Main";
 
-import { BASE_URL } from "../utils/Main";
-import { UserContext } from "../UseContext";
+
+
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from "../Context/Auth";
+
+
 
 
 function Login() {
-  const initialValues = {
-    email: "",
-    password: ""
-  };
+    const navigate = useNavigate()
+
+	const { setIsAuthenticated } = useContext(AuthContext);
+
+    const formik = useFormik({
+		validationSchema: Yup.object().shape({
+			email: Yup.string()
+				.email('Enter a valid email address')
+				.required('Email address is required'),
+			password: Yup.string().required('Password is required'),
+		}),
+		initialValues: {
+			email: '',
+			password: '',
+		},
+    
+		onSubmit: async (values, { resetForm }) => {
+			try {
+                console.log("Formik Values:", formik.values);
+              
+                const response = await api.post("login", values);
+                const res = response.data;
+                console.log(res);
+                toast.success(res.message);
+                resetForm();
+                localStorage.setItem("session", JSON.stringify(res));
+                setIsAuthenticated(true);
+                navigate("/")
+            } catch (error) {
+                const data = error.response.data;
+                console.log("Please enter a valid pass");
+                toast.error(data.message);
+            }
+        }
+        
+    });
+   
+
+    console.log(formik.errors);
+
+    return (
+        <Card style={{ width: '30rem' }} className="mx-auto">
+            <Card.Header as="h5" >Register or Sign up</Card.Header>
 
 
-  const validate = (values) => {
-    let errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!values.email) {
-      errors.email = "Email is required";
-    } else if (!regex.test(values.email)) {
-      errors.email = "Invalid Email";
-    }
-    if (!values.password) {
-      errors.password = "Password is required";
-    } else if (values.password.length < 4) {
-      errors.password = "Password too short";
-    }
-    return errors;
-  };
-
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email is required"),
-    password: Yup.string()
-      .required("Password is required")
-      .min(4, "Password is too short - should be 4 chars minimum"),
-  });
-
-  const{setUser}=useContext(UserContext)
-
-
-  return (
-    <Card style={{ width: '30rem' }} className="mx-auto">
-      <Card.Header as="h5" >Register or Sign up</Card.Header>
-
-      <Formik
-        initialValues={initialValues}
-        validationSchema={LoginSchema}
-        onSubmit={async (values, { resetForm }) => {
-          try {
-            const {data} = await axios.post('http://127.0.0.1:5000/login',values, {
-              headers: {
-                  'Content-Type': 'application/json',
-                 
-              },      
-          })  
-            // console.log(res);
-            console.log('Login successfull')
-            setUser(data)
+            <Form onSubmit={formik.handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control
+                         margin="normal"
+                         required 
+                         type="text"                    
+                         label="Email Address"
+                         name="email"
+                         autoComplete="email"
+                         onChange={formik.handleChange}
+                         autoFocus
+                         onBlur={formik.onBlur}
+                         value={formik.values.email}
+                    />
+                    {formik.errors.email && formik.touched.email && (
+                        <span className="error">{formik.errors.email}</span>
+                    )}
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword" >
+                    <Form.Control
+                        margin="normal"
+                        required
+                   
+                        label="Password"
+                        type="password"
+                        name="password"
+                        autoComplete="current-password"
+                        onChange={formik.handleChange}
+                        onBlur={formik.onBlur}
+                        value={formik.values.password}
+                        placeholder="Password"
+                    />
+                    {formik.errors.password && formik.touched.password && (
+                        <span className="error">{formik.errors.password}</span>
+                    )}
+                </Form.Group>
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className={!(formik.dirty && formik.isValid) ? "disabled-btn" : ""}
+                    disabled={!(formik.dirty && formik.isValid)}
+                >
+                    Log in
+                </Button>
+            </Form>
       
-          } catch (error) {
-            console.error(error);
-       
-          } finally {
-            resetForm();
-          }
-        }}
-      >
-        {(formik) => (
-          <FormikForm onSubmit={formik.handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control
-                type="email"
-                name="email"
-          
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                className={formik.errors.email && formik.touched.email ? "input-error" : null}
-                placeholder="Enter your email"
-              />
-              {formik.errors.email && formik.touched.email && (
-                <span className="error">{formik.errors.email}</span>
-              )}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Control
-                type="password"
-                name="password"
-         
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                className={formik.errors.password && formik.touched.password ? "input-error" : null}
-                placeholder="Password"
-              />
-              {formik.errors.password && formik.touched.password && (
-                <span className="error">{formik.errors.password}</span>
-              )}
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-              className={!(formik.dirty && formik.isValid) ? "disabled-btn" : ""}
-              disabled={!(formik.dirty && formik.isValid)}
-            >
-              Log in
-            </Button>
-          </FormikForm>
-        )}
-      </Formik>
-    </Card>
-  );
+
+            <p>
+                Dont have an account?
+                <Link to="/sign-up">Signup</Link>
+            </p>
+        </Card>
+    )
 }
 
-export default Login;
+export default Login
