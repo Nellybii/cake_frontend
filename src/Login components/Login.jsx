@@ -4,7 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import * as Yup from "yup";
+import axios from 'axios';
 
+import { BASE_URL } from "../utils/Main";
 
 function Login() {
   const initialValues = {
@@ -35,30 +37,33 @@ function Login() {
       .required("Password is required")
       .min(4, "Password is too short - should be 4 chars minimum"),
   });
-  const handleSubmit = async (values)=>{
-    const response = await fetch(`${BASE_URL}/login`,{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    })
-  }
-  const data = await response.json();
-
 
 
   return (
-    <Card style={{ width: '30rem' }}>
-      <Card.Header as="h5">Log In</Card.Header>
+    <Card style={{ width: '30rem' }} className="mx-auto">
+      <Card.Header as="h5" >Register or Sign up</Card.Header>
+
       <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
-        onSubmit={handleSubmit}
-      //   onSubmit={(values) => {
-      //     console.log(values);
-      //   }}
-      // >
+        onSubmit={async (values, { resetForm }) => {
+          try {
+            const res = await axios.post('http://127.0.0.1:5000/login',values, {
+              headers: {
+                  'Content-Type': 'application/json',
+                 
+              },      
+          })  
+            console.log(res);
+      
+          } catch (error) {
+            console.error(error);
+       
+          } finally {
+            resetForm();
+          }
+        }}
+      >
         {(formik) => (
           <FormikForm onSubmit={formik.handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">

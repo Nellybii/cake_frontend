@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import {FaShoppingCart } from 'react-icons/fa';
 import Cart from "../../components/Cart";
+import Navlog from "../../Login components/Navlog";
 
 import Home from "./Home";
 import About from "./About";
@@ -93,12 +94,13 @@ function Navigation() {
             <Nav.Link href="/cart">
               <FaShoppingCart />
             </Nav.Link>
-            <Nav.Link href="/login">
+            {/* <Nav.Link href="/login">
               Log In
             </Nav.Link>
             <Nav.Link href="/sign-up">
             Sign Up
-            </Nav.Link>
+            </Nav.Link> */}
+            <Navlog/>
           </Nav>
         </Container>
       </Navbar>
