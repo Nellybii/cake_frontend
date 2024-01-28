@@ -1,49 +1,119 @@
-// Login.js
-import React from 'react';
-// import { Formik, Field, Form, ErrorMessage } from 'formik';
-// import * as Yup from 'yup';
+import { useContext, useState } from "react";
+import { useFormik } from "formik";
+import toast from "react-hot-toast";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import * as Yup from "yup";
+import { api } from "../utils/Main";
 
-const LoginSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().required('Required'),
-});
 
-const Login = () => {
-  const initialValues = {
-    email: '',
-    password: '',
-  };
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log(values);
-    setSubmitting(false);
-  };
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from "../Context/Auth";
 
-  return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={LoginSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form>
-        <div>
-          <label htmlFor="email">Email</label>
-          <Field type="email" name="email" />
-          <ErrorMessage name="email" component="div" />
-        </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
-          <Field type="password" name="password" />
-          <ErrorMessage name="password" component="div" />
-        </div>
 
-        <div>
-          <button type="submit">Login</button>
-        </div>
-      </Form>
-    </Formik>
-  );
-};
 
-export default Login;
+function Login() {
+    const navigate = useNavigate()
+
+	const { setIsAuthenticated } = useContext(AuthContext);
+
+    const formik = useFormik({
+		validationSchema: Yup.object().shape({
+			email: Yup.string()
+				.email('Enter a valid email address')
+				.required('Email address is required'),
+			password: Yup.string().required('Password is required'),
+		}),
+		initialValues: {
+			email: '',
+			password: '',
+		},
+    
+		onSubmit: async (values, { resetForm }) => {
+			try {
+                console.log("Formik Values:", formik.values);
+              
+                const response = await api.post("login", values);
+                const res = response.data;
+                console.log(res);
+                toast.success(res.message);
+                resetForm();
+                localStorage.setItem("session", JSON.stringify(res));
+                setIsAuthenticated(true);
+                navigate("/")
+            } catch (error) {
+                const data = error.response.data;
+                console.log("Please enter a valid pass");
+                toast.error(data.message);
+            }
+        }
+        
+    });
+   
+
+    console.log(formik.errors);
+
+    return (
+        <Card style={{ width: '30rem' }} className="mx-auto">
+            <Card.Header as="h5" >Register or Sign up</Card.Header>
+
+
+            <Form onSubmit={formik.handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control
+                         margin="normal"
+                         required 
+                         type="text"                    
+                         label="Email Address"
+                         name="email"
+                         autoComplete="email"
+                         onChange={formik.handleChange}
+                         autoFocus
+                         onBlur={formik.onBlur}
+                         value={formik.values.email}
+                    />
+                    {formik.errors.email && formik.touched.email && (
+                        <span className="error">{formik.errors.email}</span>
+                    )}
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword" >
+                    <Form.Control
+                        margin="normal"
+                        required
+                   
+                        label="Password"
+                        type="password"
+                        name="password"
+                        autoComplete="current-password"
+                        onChange={formik.handleChange}
+                        onBlur={formik.onBlur}
+                        value={formik.values.password}
+                        placeholder="Password"
+                    />
+                    {formik.errors.password && formik.touched.password && (
+                        <span className="error">{formik.errors.password}</span>
+                    )}
+                </Form.Group>
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className={!(formik.dirty && formik.isValid) ? "disabled-btn" : ""}
+                    disabled={!(formik.dirty && formik.isValid)}
+                >
+                    Log in
+                </Button>
+            </Form>
+      
+
+            <p>
+                Dont have an account?
+                <Link to="/sign-up">Signup</Link>
+            </p>
+        </Card>
+    )
+}
+
+export default Login
