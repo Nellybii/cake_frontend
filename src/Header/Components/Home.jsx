@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BASE_URL } from "../../utils/Main";
 
+
 function Home({ filteredProducts }) {
   const addToCart = (product) => {
     fetch(`${BASE_URL}/cartItems`, {
@@ -26,12 +27,13 @@ function Home({ filteredProducts }) {
         return res.json();
       })
       .then(() => {
-        console.log("Item added to cart successfully");
+        alert(`${product.name} added to cart successfully`);
       })
       .catch((error) => {
         console.error("Error adding item to cart:", error.message);
       });
   };
+
 
   return (
     <>
@@ -48,5 +50,6 @@ function Home({ filteredProducts }) {
     </>
   );
 }
+
 
 export default Home;

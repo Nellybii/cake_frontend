@@ -8,12 +8,19 @@ export const AuthContext = createContext({
     setIsAuthenticated: () => null,
     logout: () => null,
   });
+
+  
   export const AuthProvider = ({ children }) => {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const [user, setUser] = useState(null);
 
+    const logout = () => {   
+      localStorage.removeItem("session")    
+      setIsAuthenticated(false);
+    };
+    
     useEffect(() => {
 
         const session = JSON.parse(localStorage.getItem("session"));
@@ -35,10 +42,7 @@ export const AuthContext = createContext({
         }
     }, [])
 
-    const logout = () => {   
-        localStorage.removeItem("session")    
-        setIsAuthenticated(false);
-      };
+    
       return (
         <AuthContext.Provider
           value={{ isAuthenticated, setIsAuthenticated, logout, user }}
