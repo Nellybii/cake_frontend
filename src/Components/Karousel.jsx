@@ -4,6 +4,7 @@ import { Carousel, Image } from "react-bootstrap";
 function Karousel() {
   return (
     <div>
+
       <Carousel style={{height:"400px", marginBottom:"10px"}}>
       <Carousel.Item>
         <Image style={{height:"400px", width:"100%"}}
@@ -42,7 +43,7 @@ function Karousel() {
       </Carousel.Item>
     </Carousel>  
     </div>
-  )
+  );
 }
 
 export default Karousel
