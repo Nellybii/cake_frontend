@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { FaUser, FaShoppingCart } from 'react-icons/fa';
+import {FaShoppingCart } from 'react-icons/fa';
 import Cart from "../../components/Cart";
-import UserProfileForm from "../../Login components/Profile";
-import Userprofile from "../../Login components/Userprofile";
+
 import Home from "./Home";
 import About from "./About";
 import Contact from "./Contact";
 import { BASE_URL } from "../../utils/Main";
+import Login from "../../Login components/Login";
+import Signup from "../../Login components/Signup";
 
 function Navigation() {
   const [products, setProducts] = useState([]);
@@ -92,8 +93,11 @@ function Navigation() {
             <Nav.Link href="/cart">
               <FaShoppingCart />
             </Nav.Link>
-            <Nav.Link href="/user-profile">
-              <FaUser />
+            <Nav.Link href="/login">
+              Log In
+            </Nav.Link>
+            <Nav.Link href="/sign-up">
+            Sign Up
             </Nav.Link>
           </Nav>
         </Container>
@@ -104,8 +108,8 @@ function Navigation() {
         <Route exact path="/about" element={<About />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/cart" element={<Cart />} />
-        <Route exact path="/user-profile" element={<Userprofile />} />
-        <Route exact path="/profile" element={<UserProfileForm />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/sign-up" element={<Signup/>} />
       </Routes>
     </>
   );
