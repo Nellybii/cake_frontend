@@ -47,8 +47,7 @@ function Signup() {
 
     return (
         <>
-            {showModal && (
-                <Card style={{ width: '30rem' }} className="mx-auto">
+                <Card style={{ width: '30rem', marginTop: '100px' }} className="mx-auto">
                     <Card.Header as="h5">Register or Sign up</Card.Header>
                     <Form onSubmit={formik.handleSubmit}>
                         <Form.Group className="mb-3">
@@ -116,12 +115,6 @@ function Signup() {
                         Already have an account? <Link to="/login">Login</Link>
                     </p>
                 </Card>
-            )}
-            {!showModal && (
-                <p>
-                    Successfully signed up! {/* You can customize this success message */}
-                </p>
-            )}
         </>
     );
 }

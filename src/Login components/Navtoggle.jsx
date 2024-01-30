@@ -17,25 +17,20 @@ function Navtoggle() {
     }
 
     return (
-        
-        <>
+      <>
         <Form inline className="mx-3">
-            {/* {isAuthenticated ? ( */}
-                <ButtonGroup>
-                
-                
-                <Signupbutton/>
-                <Loginbutton/>
-                    
-                </ButtonGroup>
-            {/* ) : (
+          {/* {isAuthenticated ? ( */}
+          <ButtonGroup>
+            
+          </ButtonGroup>
+          {/* ) : (
                 <Button variant="secondary" onClick={handleLogout}>
                     Logout
                 </Button>
             )} */}
         </Form>
-    </>
-    )
+      </>
+    );
 }
 
 export default Navtoggle

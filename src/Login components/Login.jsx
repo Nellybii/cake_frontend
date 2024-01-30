@@ -1,119 +1,89 @@
 import { useContext, useState } from "react";
+import { Button, Form, InputGroup, FormControl, Card } from "react-bootstrap";
 import { useFormik } from "formik";
+import { BASE_URL } from "../utils/Main";
 import toast from "react-hot-toast";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
-import * as Yup from "yup";
-import { api } from "../utils/Main";
-
-
-
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from "../Context/Auth";
-
-
-
+import { Link, useNavigate } from "react-router-dom";
+import { User } from "../Login components/User";
 
 function Login() {
-    const navigate = useNavigate()
-
-	const { setIsAuthenticated } = useContext(AuthContext);
-
-    const formik = useFormik({
-		validationSchema: Yup.object().shape({
-			email: Yup.string()
-				.email('Enter a valid email address')
-				.required('Email address is required'),
-			password: Yup.string().required('Password is required'),
-		}),
-		initialValues: {
-			email: '',
-			password: '',
-		},
-    
-		onSubmit: async (values, { resetForm }) => {
-			try {
-                console.log("Formik Values:", formik.values);
-              
-                const response = await api.post("login", values);
-                const res = response.data;
-                console.log(res);
-                toast.success(res.message);
-                resetForm();
-                localStorage.setItem("session", JSON.stringify(res));
-                setIsAuthenticated(true);
-                navigate("/")
-            } catch (error) {
-                const data = error.response.data;
-                console.log("Please enter a valid pass");
-                toast.error(data.message);
-            }
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useContext(User);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const res = await fetch(`${BASE_URL}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.status == "fail") {
+          toast.error(data.message);
+        } else if (data.status == "success") {
+          toast.success(data.message);
+          resetForm();
+          localStorage.setItem("session", JSON.stringify(data));
+          setIsAuthenticated(true);
+          navigate("/");
         }
-        
-    });
-   
+      } catch (error) {
+        toast.error("Unable to login. Please try again later.");
+      }
+    },
+  });
 
-    console.log(formik.errors);
-
-    return (
-        <Card style={{ width: '30rem' }} className="mx-auto">
-            <Card.Header as="h5" >Register or Sign up</Card.Header>
-
-
-            <Form onSubmit={formik.handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control
-                         margin="normal"
-                         required 
-                         type="text"                    
-                         label="Email Address"
-                         name="email"
-                         autoComplete="email"
-                         onChange={formik.handleChange}
-                         autoFocus
-                         onBlur={formik.onBlur}
-                         value={formik.values.email}
-                    />
-                    {formik.errors.email && formik.touched.email && (
-                        <span className="error">{formik.errors.email}</span>
-                    )}
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword" >
-                    <Form.Control
-                        margin="normal"
-                        required
-                   
-                        label="Password"
-                        type="password"
-                        name="password"
-                        autoComplete="current-password"
-                        onChange={formik.handleChange}
-                        onBlur={formik.onBlur}
-                        value={formik.values.password}
-                        placeholder="Password"
-                    />
-                    {formik.errors.password && formik.touched.password && (
-                        <span className="error">{formik.errors.password}</span>
-                    )}
-                </Form.Group>
-                <Button
-                    variant="primary"
-                    type="submit"
-                    className={!(formik.dirty && formik.isValid) ? "disabled-btn" : ""}
-                    disabled={!(formik.dirty && formik.isValid)}
-                >
-                    Log in
-                </Button>
-            </Form>
-      
-
-            <p>
-                Dont have an account?
-                <Link to="/sign-up">Signup</Link>
-            </p>
-        </Card>
-    )
+  return (
+    <Card style={{ width: "30rem", marginTop: "100px" }} className="mx-auto">
+      <Card.Header as="h5">Log in</Card.Header>
+      <Form
+        onSubmit={formik.handleSubmit}
+        style={{
+          width: "26rem",
+          marginTop: "20px",
+          marginLeft: "30px",
+        }}
+      >
+        <InputGroup className="mb-3" md="6">
+          <InputGroup.Text id="basic-addon1">user@gmail.com</InputGroup.Text>
+          <Form.Control
+            required
+            type="email"
+            placeholder="Email"
+            aria-label="Email"
+            aria-describedby="basic-addon1"
+            name="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+          />
+        </InputGroup>
+        <InputGroup className="mb-3">
+          <Form.Control
+            required
+            type="password"
+            placeholder="Password"
+            aria-label="Password"
+            aria-describedby="basic-addon2"
+            name="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+          />
+        </InputGroup>
+        <Button type="submit">Login</Button>
+        <p>
+          Dont have an account?
+          <Link to="/sign-up">Signup</Link>
+        </p>
+      </Form>
+    </Card>
+  );
 }
 
-export default Login
+export default Login;

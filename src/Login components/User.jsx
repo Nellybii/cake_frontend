@@ -1,31 +1,29 @@
-import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { FaUser } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { createContext, useEffect, useState } from "react";
 
-export default function User({ isAuthenticated }) {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+export const User = createContext({isAuthenticated: false, setIsAuthenticated: () => null,
+logout: () => null,})
+
+export const AuthProvider = ({children}) => {
+const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+ useEffect(() => {
+   const session = JSON.parse(localStorage.getItem("session"));
+   console.log(session)
+   if (session) {
+     setIsAuthenticated(true);
+    }
+ }, []);
+
+ const logout = () => {
+  localStorage.removeItem('session')
+  setIsAuthenticated(false)
+ }
 
   return (
-    <div className="user-profile-dropdown">
-      <Button onClick={toggleDropdown}>
-        <FaUser /> User
-      </Button>
-      {isOpen && (
-        <div className="dropdown-content">
-          <NavLink to="/profile" onClick={toggleDropdown}>
-            <h3>User Profile</h3>
-          </NavLink>
-          <NavLink to="/login" onClick={toggleDropdown}>
-          <h3>Log in</h3>
-          </NavLink>
-          
-        </div>
-      )}
-    </div>
-  );
+    <User.Provider value={{isAuthenticated, setIsAuthenticated, logout}}>
+      {children}
+    </User.Provider>
+  )
 }
+

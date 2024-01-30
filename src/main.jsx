@@ -7,19 +7,19 @@ import './index.css'
 
 {/* set custom breakpoints  */ }
 import ThemeProvider from 'react-bootstrap/ThemeProvider'
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from './Login components/User';
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <Toaster position="top-right" />
     <BrowserRouter>
-
-
-      <ThemeProvider breakpoints={['xxl']}
-        minBreakpoint="xs">
-        <App />
+      <ThemeProvider breakpoints={["xxl"]} minBreakpoint="xs">
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </ThemeProvider>
-
     </BrowserRouter>
-
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
